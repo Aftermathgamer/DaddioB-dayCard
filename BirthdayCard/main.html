@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        .card {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2.message {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .sender {
+            font-weight: bold;
+            color: #888;
+            text-align: center;
+        }
+        
+        .game-replica {
+            position: relative;
+            width: 100px; /* Adjust width and height based on sprite size */
+            height: 140px;
+            background-image: url('samus_sprite_sheet.png');
+            background-size: 100px 140px; /* Adjust the sprite sheet dimensions */
+            animation-duration: 0.8s;
+            animation-timing-function: steps(8); /* Adjust the number of steps based on the number of frames in the sprite sheet */
+            animation-iteration-count: infinite;
+        }
+        
+        .game-replica.idle {
+            background-position: 0 0;
+        }
+        
+        .game-replica.walking-left {
+            background-position: -64px 0;
+        }
+        
+        .game-replica.walking-right {
+            background-position: -128px 0;
+        }
+        
+        .game-replica.jumping {
+            background-position: -192px 0;
+        }
+        
+        @keyframes walking-left {
+            0% {
+                transform: scaleX(-1); /* Flip the sprite horizontally for walking left */
+            }
+            100% {
+                transform: scaleX(-1);
+            }
+        }
+        
+        @keyframes walking-right {
+            0% {
+                transform: scaleX(1);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        
+        @keyframes jumping {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-64px); /* Adjust the vertical translation based on the jumping height */
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 class="message">Happy Birthday!</h2>
+        <p class="sender">From: Matthew</p>
+        <p>Dear Daddio,</p>
+        <p>I know I have been not the perfect son although raised by the perfect dad. And even if you don't see yourself that way I want you to understand that we all recognise how hard you work for this family and that it isnt going unnotised. I love you dad!</p>
+        <p>Sincerely,</p>
+        <p>Matthew</p>
+    </div>
+    
+    <div class="game-replica idle"></div>
+    
+    <script>
+        var gameReplica = document.querySelector('.game-replica');
+        
+        function startWalkingLeft() {
+            gameReplica.classList.remove('idle');
+            gameReplica.classList.remove('walking-right');
+            gameReplica.classList.add('walking-left');
+            gameReplica.style.animationName = 'walking-left';
+        }
+        
+        function stopWalkingLeft() {
+            gameReplica.classList.remove('walking-left');
+            gameReplica.classList.add('idle');
+            gameReplica.style.animationName = '';
+        }
+        
+        function startWalkingRight() {
+            gameReplica.classList.remove('idle');
+            gameReplica.classList.remove('walking-left');
+            gameReplica.classList.add('walking-right');
+            gameReplica.style.animationName = 'walking-right';
+        }
+        
+        function stopWalkingRight() {
+            gameReplica.classList.remove('walking-right');
+            gameReplica.classList.add('idle');
+            gameReplica.style.animationName = '';
+        }
+        
+        function startJumping() {
+            gameReplica.classList.remove('idle');
+            gameReplica.classList.remove('walking-left');
+            gameReplica.classList.remove('walking-right');
+            gameReplica.classList.add('jumping');
+            gameReplica.style.animationName = 'jumping';
+        }
+        
+        function stopJumping() {
+            gameReplica.classList.remove('jumping');
+            gameReplica.classList.add('idle');
+            gameReplica.style.animationName = '';
+        }
+        
+        // Example usage of the movement functions
+        // You can trigger them based on user input or specific events
+        
+        // Start walking left
+        startWalkingLeft();
+        
+        // Stop walking left after 3 seconds
+        setTimeout(stopWalkingLeft, 3000);
+        
+        // Start walking right after 4 seconds
+        setTimeout(startWalkingRight, 4000);
+        
+        // Stop walking right after 7 seconds
+        setTimeout(stopWalkingRight, 7000);
+        
+        // Start jumping after 8 seconds
+        setTimeout(startJumping, 8000);
+        
+        // Stop jumping after 10 seconds
+        setTimeout(stopJumping, 10000);
+    </script>
+</body>
+</html>
